@@ -11,7 +11,7 @@ public class Delivery {
     @Column(name = "delivery_id")
     private Long id;
     
-    @OneToOne(mappedBy = "delivery")       // FK는 많이 액세스하는 곳에 하는 것을 추천
+    @OneToOne(mappedBy = "delivery", fetch = FetchType.LAZY)       // FK는 많이 액세스하는 곳에 하는 것을 추천
     private Order order;
 
     @Embedded

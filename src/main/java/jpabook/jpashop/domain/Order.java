@@ -17,11 +17,12 @@ public class Order {
     @Column(name = "order_id")
     private Long id;
 
-    @ManyToOne      //order and member
+    @ManyToOne(fetch = FetchType.LAZY)      //order and member
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @OneToMany(mappedBy = "order")
+    //cascade는 persist를 전파
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -32,4 +33,19 @@ public class Order {
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status;  // 주문 상태 [ORDER, CANCEL]
+
+    // 연관관계 메서드 (양방향)
+    public void setMember(Member member) {
+        this.member = member;
+    }
+
+    public void addOrderItem(OrderItem orderItem){
+        orderItems.add(orderItem);
+        orderItem.setOrder(this);
+    }
+
+    public void setDelivery(Delivery delivery){
+        this.delivery = delivery;
+        delivery.setOrder(this);
+    }
 }
