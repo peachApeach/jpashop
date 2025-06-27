@@ -76,17 +76,6 @@ public class Order {
         }
     }
 
-    // 생성 메서드
-    public static OrderItem createOrderItem(Item item, int orderPrice, int count){
-        OrderItem orderItem = new OrderItem();
-        orderItem.setItem(item);
-        orderItem.setOrderPrice(orderPrice);
-        orderItem.setCount(count);
-
-        item.removeStock(count);
-        return orderItem;
-    }
-
     // 조회 로직    // 주문의 토탈 가격
     public int getTotalPrice() {
         int totalPrice = 0;
