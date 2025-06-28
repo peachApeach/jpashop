@@ -2,7 +2,7 @@ package jpabook.jpashop.domain.item;
 
 import jakarta.persistence.*;
 import jpabook.jpashop.domain.Category;
-import jpabook.jpashop.exception.NotEnoghStockException;
+import jpabook.jpashop.exception.NotEnoughStockException;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -37,7 +37,7 @@ public abstract class Item {     // 구현체를 가치고 할 것이기 때문�
     public void removeStock(int quantity) {
         int restStock = this.stockQuantity - quantity;
         if (restStock<0) {
-            throw  new NotEnoghStockException("need more stock");
+            throw  new NotEnoughStockException("need more stock");
         }
         this.stockQuantity = restStock;
     }
